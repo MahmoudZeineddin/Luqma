@@ -2,12 +2,28 @@ class FoodItemModel {
   final String name;
   final String imageUrl;
   final double price;
+  final bool isFavorite;
 
   FoodItemModel({
     required this.name,
     required this.imageUrl,
     required this.price,
+    this.isFavorite = false,
   });
+
+  FoodItemModel copyWith({
+    String? name,
+    String? imageUrl,
+    double? price,
+    bool? isFavorite,
+  }) {
+    return FoodItemModel(
+      name: name ?? this.name,
+      imageUrl: imageUrl ?? this.imageUrl,
+      price: price ?? this.price,
+      isFavorite: isFavorite ?? this.isFavorite,
+    );
+  }
 }
 
 List<FoodItemModel> foodMenu = [
@@ -16,6 +32,7 @@ List<FoodItemModel> foodMenu = [
     imageUrl:
         'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400',
     price: 9.0,
+    isFavorite: true,
   ),
   FoodItemModel(
     name: "Margherita Pizza",
@@ -28,6 +45,7 @@ List<FoodItemModel> foodMenu = [
     imageUrl:
         'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400',
     price: 4.0,
+    isFavorite: true,
   ),
   FoodItemModel(
     name: "Pasta Pesto",
@@ -51,6 +69,7 @@ List<FoodItemModel> foodMenu = [
     name: "Taco Supreme",
     imageUrl: 'https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?w=400',
     price: 9.5,
+    isFavorite: true,
   ),
   FoodItemModel(
     name: "Ceasar Salad",

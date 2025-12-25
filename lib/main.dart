@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/screens/bottom_navbar.dart';
 import 'package:food_delivery/screens/home_page.dart';
 
 void main() {
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Luqma -Food Delivery App',
-      home: const HomePage(),
+      home: const BottomNavBarPage(),
       debugShowCheckedModeBanner: false,
     );
   }

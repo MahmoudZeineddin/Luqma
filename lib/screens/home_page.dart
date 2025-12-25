@@ -12,17 +12,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text('Luqma'),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 0, // اللي بيفصل بين الappbar and Scaffold
-      ),
-      drawer: Drawer(),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SingleChildScrollView(
         child: Column(
           children: [
             ClipRRect(
@@ -35,17 +27,19 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 20.0),
-            Expanded(
-              child: GridView.builder(
-                itemCount: foodMenu.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
-                ),
-                itemBuilder: (context, index) =>
-                    FoodGrigeItem(foodMenu: foodMenu[index]),
+            GridView.builder(
+              shrinkWrap:
+                  true, //  علشان يآخذ بس المساحة اللي بيحتاجها ما يآخذ كل المساحة المتبقية
+              itemCount: foodMenu.length,
+              physics:
+                  const NeverScrollableScrollPhysics(), // جعل التمرير بس من خلال السكروال الرئيسي للوديجت
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 20,
+                crossAxisSpacing: 20,
               ),
+              itemBuilder: (context, index) =>
+                  FoodGrigeItem(foodItem: foodMenu[index]),
             ),
           ],
         ),
