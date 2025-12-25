@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/models/food_item.dart';
 
 class FoodGrigeItem extends StatefulWidget {
-  final FoodItemModel foodItem;
-  const FoodGrigeItem({super.key, required this.foodItem});
+  final int foodIndex;
+  const FoodGrigeItem({super.key, required this.foodIndex});
 
   @override
   State<FoodGrigeItem> createState() => _FoodGrigeItemState();
 }
 
 class _FoodGrigeItemState extends State<FoodGrigeItem> {
-  bool isFav = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,7 +20,7 @@ class _FoodGrigeItemState extends State<FoodGrigeItem> {
           Stack(
             children: [
               Image.network(
-                widget.foodItem.imageUrl,
+                foodMenu[widget.foodIndex].imageUrl,
                 height: 100,
                 fit: BoxFit.contain,
               ),
@@ -37,13 +36,22 @@ class _FoodGrigeItemState extends State<FoodGrigeItem> {
                   child: InkWell(
                     onTap: () => {
                       setState(() {
-                        widget.foodItem.copyWith(isFavorite: true);
-                        isFav = !isFav;
+                        foodMenu[widget.foodIndex] = foodMenu[widget.foodIndex]
+                            .copyWith(
+                              isFavorite:
+                                  !foodMenu[widget.foodIndex].isFavorite,
+                            );
                       }),
                     },
-                    child: isFav
-                        ? Icon(Icons.favorite, color: Colors.red)
-                        : Icon(Icons.favorite_border, color: Colors.red),
+                    child: foodMenu[widget.foodIndex].isFavorite
+                        ? Icon(
+                            Icons.favorite,
+                            color: Theme.of(context).primaryColor,
+                          )
+                        : Icon(
+                            Icons.favorite_border,
+                            color: Theme.of(context).primaryColor,
+                          ),
                   ),
                 ),
               ),
@@ -52,12 +60,12 @@ class _FoodGrigeItemState extends State<FoodGrigeItem> {
 
           const SizedBox(height: 10.0),
           Text(
-            widget.foodItem.name,
+            foodMenu[widget.foodIndex].name,
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
           ),
           SizedBox(height: 10.0),
           Text(
-            "${widget.foodItem.price}\$",
+            "${foodMenu[widget.foodIndex].price}\$",
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.red,

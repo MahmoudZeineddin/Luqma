@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/screens/account_dart.dart';
 import 'package:food_delivery/screens/favorite_page.dart';
 import 'package:food_delivery/screens/home_page.dart';
 
@@ -17,11 +18,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
     });
   }
 
-  List<Widget> bodyOptions = [
-    HomePage(),
-    FavoritePage(),
-    Center(child: Text('Accont')),
-  ];
+  List<Widget> bodyOptions = [HomePage(), FavoritePage(), AccountPage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +42,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
         ],
         currentIndex: selectedIndex,
         onTap: (index) => onItemTap(index),
-        selectedItemColor: Colors.orange,
+        selectedItemColor: Theme.of(context).primaryColor,
       ),
     );
   }

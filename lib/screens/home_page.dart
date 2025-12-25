@@ -38,8 +38,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisSpacing: 20,
                 crossAxisSpacing: 20,
               ),
-              itemBuilder: (context, index) =>
-                  FoodGrigeItem(foodItem: foodMenu[index]),
+              itemBuilder: (context, index) => FoodGrigeItem(foodIndex: index),
             ),
           ],
         ),
