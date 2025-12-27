@@ -11,21 +11,28 @@ class FavoritePage extends StatefulWidget {
 class _FavoritePageState extends State<FavoritePage> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final favoriteItems = foodMenu.where((item) => item.isFavorite).toList();
     return favoriteItems.isEmpty
         ? Center(
             child: Column(
               children: [
-                Image.asset('assets/images/empty_state.png'),
+                Image.asset(
+                  'assets/images/empty_state.png',
+                  height: size.height * .3,
+                ),
+
                 Text(
                   "No favorite items found!",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
           )
         : Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(size.width * .012),
             child: ListView.builder(
               itemCount: favoriteItems.length,
               itemBuilder: (BuildContext context, int index) {
@@ -39,28 +46,29 @@ class _FavoritePageState extends State<FavoritePage> {
                       children: [
                         Image.network(
                           favoriteItems[index].imageUrl,
-                          height: 70,
+                          height: size.height * .08,
                         ),
-                        SizedBox(width: 10.0),
+
                         Expanded(
                           child: Column(
                             children: [
-                              SizedBox(height: 5.0),
+                              SizedBox(width: size.height * .02),
                               Text(
                                 favoriteItems[index].name,
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                style: Theme.of(context).textTheme.titleMedium,
                               ),
                               Text(
                                 "\$ ${favoriteItems[index].price}",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Theme.of(context).primaryColor,
-                                ),
+                                style: Theme.of(context).textTheme.titleMedium!
+                                    .copyWith(
+                                      color: Theme.of(context).primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                               ),
                             ],
                           ),
                         ),
-                        SizedBox(width: 6.0),
+                        SizedBox(width: size.height * .02),
                         IconButton(
                           onPressed: () {
                             final targetedItem = favoriteItems[index];
@@ -73,7 +81,7 @@ class _FavoritePageState extends State<FavoritePage> {
                           },
                           icon: Icon(Icons.favorite),
                           color: Theme.of(context).primaryColor,
-                          iconSize: 30,
+                          iconSize: size.height * .040,
                         ),
                       ],
                     ),

@@ -22,12 +22,11 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Luqma'),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 0, // اللي بيفصل بين الappbar and Scaffold
+        // backgroundColor: Colors.white,
+        // foregroundColor: Colors.black,
+        //elevation: 0, // اللي بيفصل بين الappbar and Scaffold
       ),
       drawer: Drawer(),
       body: bodyOptions[selectedIndex],

@@ -12,6 +12,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
@@ -22,11 +23,11 @@ class _HomePageState extends State<HomePage> {
               borderRadius: BorderRadius.circular(24.0),
               child: Image.asset(
                 'assets/images/classic_burger.jpg',
-                height: 200,
+                height: size.height * .215,
                 fit: BoxFit.cover,
               ),
             ),
-            const SizedBox(height: 20.0),
+            SizedBox(height: size.height * .02),
             GridView.builder(
               shrinkWrap:
                   true, //  علشان يآخذ بس المساحة اللي بيحتاجها ما يآخذ كل المساحة المتبقية
@@ -35,8 +36,8 @@ class _HomePageState extends State<HomePage> {
                   const NeverScrollableScrollPhysics(), // جعل التمرير بس من خلال السكروال الرئيسي للوديجت
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisSpacing: 20,
-                crossAxisSpacing: 20,
+                mainAxisSpacing: size.height * .02,
+                crossAxisSpacing: size.height * .02,
               ),
               itemBuilder: (context, index) => FoodGrigeItem(foodIndex: index),
             ),

@@ -12,16 +12,18 @@ class FoodGrigeItem extends StatefulWidget {
 class _FoodGrigeItemState extends State<FoodGrigeItem> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(color: Colors.grey[100]),
       child: Column(
         children: [
           /**/
           Stack(
+            alignment: Alignment.topCenter,
             children: [
               Image.network(
                 foodMenu[widget.foodIndex].imageUrl,
-                height: 100,
+                height: size.height * .12,
                 fit: BoxFit.contain,
               ),
               Align(
@@ -61,14 +63,16 @@ class _FoodGrigeItemState extends State<FoodGrigeItem> {
           const SizedBox(height: 10.0),
           Text(
             foodMenu[widget.foodIndex].name,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10.0),
           Text(
             "${foodMenu[widget.foodIndex].price}\$",
-            style: const TextStyle(
+            style: Theme.of(context).textTheme.titleSmall!.copyWith(
+              color: Theme.of(context).primaryColor,
               fontWeight: FontWeight.bold,
-              color: Colors.red,
             ),
           ),
           const SizedBox(height: 10.0),

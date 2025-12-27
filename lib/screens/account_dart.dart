@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/core/extensions/context_extensions.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
@@ -14,15 +15,11 @@ class AccountPage extends StatelessWidget {
         children: [
           Text(
             '$number',
-            style: TextStyle(
-              fontSize: 25,
+            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
               color: Theme.of(context).primaryColor,
             ),
           ),
-          Text(
-            name,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
+          Text(name, style: Theme.of(context).textTheme.titleLarge),
         ],
       ),
     );
@@ -42,14 +39,14 @@ class AccountPage extends StatelessWidget {
         onTap: () {},
         leading: Icon(
           leadingIcon,
-          size: 25,
+          size: context.widthPct(.07),
           color: Theme.of(context).primaryColor,
         ),
         subtitle: subtitle != null ? Text(subtitle) : subtitle = null,
         trailing: Icon(
           Icons.chevron_right,
           color: Theme.of(context).primaryColor,
-          size: 25,
+          size: context.widthPct(.07),
         ),
       ),
     );
@@ -57,6 +54,7 @@ class AccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Center(
       child: Column(
         children: [
@@ -67,7 +65,9 @@ class AccountPage extends StatelessWidget {
           const SizedBox(height: 20),
           Text(
             "Mahmoud Zeineddin",
-            style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.bold),
           ),
 
           Row(
@@ -77,13 +77,13 @@ class AccountPage extends StatelessWidget {
               orderVoucherItem(context, name: 'Vouchers', number: 4),
             ],
           ),
-          const Divider(thickness: .5, indent: 25, endIndent: 25),
+          const Divider(),
           itemTapTile(
             context,
             title: "Available Vouchers",
             leadingIcon: Icons.local_offer,
           ),
-          const Divider(thickness: .5, indent: 25, endIndent: 25),
+          const Divider(),
           itemTapTile(
             context,
             title: "Past Orders",
