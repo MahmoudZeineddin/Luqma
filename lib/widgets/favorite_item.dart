@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/common.dart';
 import 'package:food_delivery/models/food_item.dart';
 
 class FavoriteItem extends StatefulWidget {
@@ -21,7 +22,7 @@ class _FavoriteItemState extends State<FavoriteItem> {
           children: [
             Image.network(
               favoriteItems[widget.foodIndex].imageUrl,
-              height: 70,
+              height: context.heightPct(.07),
               errorBuilder: (context, error, stackTrace) {
                 return const Icon(
                   Icons.broken_image,

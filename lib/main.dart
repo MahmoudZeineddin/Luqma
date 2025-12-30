@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/screens/bottom_navbar.dart';
 
 void main() {
+  // WidgetsFlutterBinding();
+  // حتي يكون الخيار اللي تحت متاح لكل الأجهزة
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitDown,
+  //   DeviceOrientation.portraitUp,
+  // ]);
   runApp(const MyApp());
 }
 
@@ -12,7 +18,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Luqma -Food Delivery App',
       theme: ThemeData(
-        primaryColor: Colors.red,
+        useMaterial3: true,
+        // primaryColor: Colors.red,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.red,
+          primary: Colors.red, // لضمان أن اللون الأساسي هو الأحمر
+        ),
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.white,
