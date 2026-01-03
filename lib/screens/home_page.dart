@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/common.dart';
 import 'package:food_delivery/models/food_item.dart';
+import 'package:food_delivery/screens/food_details_page.dart';
 import 'package:food_delivery/widgets/food_gride_item.dart';
 
 class HomePage extends StatefulWidget {
@@ -52,8 +53,17 @@ class _HomePageState extends State<HomePage> {
                   mainAxisSpacing: context.heightPct(.02),
                   crossAxisSpacing: context.heightPct(.02),
                 ),
-                itemBuilder: (context, index) =>
-                    FoodGrigeItem(foodIndex: index),
+                itemBuilder: (context, index) => InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            FoodDetailsPage(foodItemModel: foodMenu[index]),
+                      ),
+                    );
+                  },
+                  child: FoodGrigeItem(foodIndex: index),
+                ),
               ),
             ],
           ),

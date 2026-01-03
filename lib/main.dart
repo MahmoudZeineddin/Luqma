@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         // primaryColor: Colors.red,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.red,
-          primary: Colors.red, // لضمان أن اللون الأساسي هو الأحمر
+          seedColor: Colors.deepOrange,
+          primary: Colors.deepOrange, // لضمان أن اللون الأساسي هو الأحمر
         ),
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: AppBarTheme(

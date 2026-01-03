@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/common.dart';
 import 'package:food_delivery/models/food_item.dart';
+import 'package:food_delivery/screens/food_details_page.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({super.key});
@@ -39,57 +40,73 @@ class _FavoritePageState extends State<FavoritePage> {
             child: ListView.builder(
               itemCount: favoriteItems.length,
               itemBuilder: (BuildContext context, int index) {
-                return Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Image.network(
-                          favoriteItems[index].imageUrl,
-                          height: !context.isLandscape
-                              ? context.heightPct(.08)
-                              : context.heightPct(.15),
+                return InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => FoodDetailsPage(
+                          foodItemModel: favoriteItems[index],
                         ),
-
-                        Expanded(
-                          child: Column(
-                            children: [
-                              SizedBox(width: context.heightPct(.02)),
-                              Text(
-                                favoriteItems[index].name,
-                                style: context.textTheme.titleMedium,
-                              ),
-                              Text(
-                                "\$ ${favoriteItems[index].price}",
-                                style: context.textTheme.titleMedium!.copyWith(
-                                  color: context.colorScheme.primary,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
+                      ),
+                    );
+                  },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Image.network(
+                            favoriteItems[index].imageUrl,
+                            height: !context.isLandscape
+                                ? context.heightPct(.08)
+                                : context.heightPct(.15),
                           ),
-                        ),
-                        SizedBox(width: context.heightPct(.02)),
-                        IconButton(
-                          onPressed: () {
-                            final targetedItem = favoriteItems[index];
-                            int targetedIndex = foodMenu.indexOf(targetedItem);
-                            setState(() {
-                              foodMenu[targetedIndex] = foodMenu[targetedIndex]
-                                  .copyWith(isFavorite: false);
-                              favoriteItems.remove(targetedItem);
-                            });
-                          },
-                          icon: Icon(Icons.favorite),
-                          color: context.colorScheme.primary,
-                          iconSize: !context.isLandscape
-                              ? context.heightPct(.040)
-                              : context.heightPct(.080),
-                        ),
-                      ],
+
+                          Expanded(
+                            child: Column(
+                              children: [
+                                SizedBox(width: context.heightPct(.02)),
+                                Text(
+                                  favoriteItems[index].name,
+                                  style: context.textTheme.titleMedium,
+                                ),
+                                Text(
+                                  "\$ ${favoriteItems[index].price}",
+                                  style: context.textTheme.titleMedium!
+                                      .copyWith(
+                                        color: context.colorScheme.primary,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(width: context.heightPct(.02)),
+                          IconButton(
+                            onPressed: () {
+                              final targetedItem = favoriteItems[index];
+                              int targetedIndex = foodMenu.indexOf(
+                                targetedItem,
+                              );
+                              setState(() {
+                                foodMenu[targetedIndex] =
+                                    foodMenu[targetedIndex].copyWith(
+                                      isFavorite: false,
+                                    );
+                                favoriteItems.remove(targetedItem);
+                              });
+                            },
+                            icon: Icon(Icons.favorite),
+                            color: context.colorScheme.primary,
+                            iconSize: !context.isLandscape
+                                ? context.heightPct(.040)
+                                : context.heightPct(.080),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );
