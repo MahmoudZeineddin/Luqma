@@ -55,12 +55,13 @@ class _HomePageState extends State<HomePage> {
                 ),
                 itemBuilder: (context, index) => InkWell(
                   onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            FoodDetailsPage(foodItemModel: foodMenu[index]),
-                      ),
-                    );
+                    Navigator.of(context)
+                        .push(
+                          MaterialPageRoute(
+                            builder: (context) => FoodDetailsPage(index: index),
+                          ),
+                        )
+                        .then((onValue) => setState(() {}));
                   },
                   child: FoodGrigeItem(foodIndex: index),
                 ),

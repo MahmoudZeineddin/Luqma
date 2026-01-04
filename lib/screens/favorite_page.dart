@@ -13,7 +13,6 @@ class FavoritePage extends StatefulWidget {
 class _FavoritePageState extends State<FavoritePage> {
   @override
   Widget build(BuildContext context) {
-    // final size = MediaQuery.of(context).size;
     final favoriteItems = foodMenu.where((item) => item.isFavorite).toList();
     return favoriteItems.isEmpty
         ? Center(
@@ -42,13 +41,20 @@ class _FavoritePageState extends State<FavoritePage> {
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
                   onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => FoodDetailsPage(
-                          foodItemModel: favoriteItems[index],
-                        ),
-                      ),
-                    );
+                    Navigator.of(context)
+                        .push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              int targetedIndex = foodMenu.indexOf(
+                                favoriteItems[index],
+                              );
+                              return FoodDetailsPage(index: targetedIndex);
+                            },
+                          ),
+                        )
+                        .then((_) {
+                          setState(() {});
+                        });
                   },
                   child: Card(
                     shape: RoundedRectangleBorder(

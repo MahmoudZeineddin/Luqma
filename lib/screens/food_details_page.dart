@@ -5,8 +5,8 @@ import 'package:food_delivery/widgets/food_details/food_item_conter.dart';
 import 'package:food_delivery/widgets/food_details/top_banner.dart';
 
 class FoodDetailsPage extends StatefulWidget {
-  final FoodItemModel foodItemModel;
-  const FoodDetailsPage({super.key, required this.foodItemModel});
+  final int index;
+  const FoodDetailsPage({super.key, required this.index});
 
   @override
   State<FoodDetailsPage> createState() => _FoodDetailsPageState();
@@ -38,129 +38,118 @@ Widget itemDetails(
 }
 
 class _FoodDetailsPageState extends State<FoodDetailsPage> {
-  // void toggleFavorite() {
-  //   final index = foodMenu.indexOf(widget.foodItemModel);
-
-  //   setState(() {
-  //     foodMenu[index] = foodMenu[index].copyWith(
-  //       isFavorite: !foodMenu[index].isFavorite,
-  //     );
-
-  //     // foodItemModel = foodMenu[index];
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TopBanner(
-                foodItemModel: widget.foodItemModel,
-                // onFavoriteToggle: toggleFavorite,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(17.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.foodItemModel.name,
-                              style: context.textTheme.headlineMedium!.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 3),
-                            Text(
-                              widget.foodItemModel.subtitle,
-                              style: context.textTheme.bodyMedium!.copyWith(
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        ),
-                        FoodItemConter(),
-                      ],
-                    ),
-
-                    SizedBox(height: 25),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: itemDetails(
-                            context,
-                            titleName: 'Size',
-                            subTitle: 'Medium',
-                          ),
-                        ),
-                        Expanded(
-                          child: itemDetails(
-                            context,
-                            titleName: 'Cooking',
-                            subTitle: '10-15 min',
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 25),
-                    Text(
-                      widget.foodItemModel.description.toString(),
-                      style: context.textTheme.bodyLarge,
-                    ),
-                    SizedBox(height: 15),
+                    TopBanner(index: widget.index),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      padding: const EdgeInsets.all(17.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "${widget.foodItemModel.price}\$",
-                            style: context.textTheme.headlineMedium!.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                          SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    foodMenu[widget.index].name,
+                                    style: context.textTheme.headlineMedium!
+                                        .copyWith(fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(height: 3),
+                                  Text(
+                                    foodMenu[widget.index].subtitle,
+                                    style: context.textTheme.bodyMedium!
+                                        .copyWith(color: Colors.grey),
+                                  ),
+                                ],
+                              ),
+                              FoodItemConter(),
+                            ],
                           ),
-                          SizedBox(width: 20),
-                          SizedBox(
-                            width: context.widthPct(.6),
-                            height: context.heightPct(.05),
-                            child: Expanded(
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: context.colorScheme.primary,
 
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                ),
-                                child: Text(
-                                  'Add to cart',
-                                  style: context.textTheme.titleLarge!.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
+                          SizedBox(height: 25),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: itemDetails(
+                                  context,
+                                  titleName: 'Size',
+                                  subTitle: 'Medium',
                                 ),
                               ),
-                            ),
+                              Expanded(
+                                child: itemDetails(
+                                  context,
+                                  titleName: 'Cooking',
+                                  subTitle: '10-15 min',
+                                ),
+                              ),
+                            ],
                           ),
+                          SizedBox(height: 25),
+                          Text(
+                            foodMenu[widget.index].description.toString(),
+                            style: context.textTheme.bodyLarge,
+                          ),
+                          SizedBox(height: 15),
                         ],
                       ),
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "${foodMenu[widget.index].price}\$",
+                    style: context.textTheme.headlineMedium!.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  SizedBox(
+                    width: context.widthPct(.6),
+                    height: context.heightPct(.05),
+                    child: Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: context.colorScheme.primary,
+
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: Text(
+                          'Add to cart',
+                          style: context.textTheme.titleLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/models/food_item.dart';
 
-class TopBanner extends StatelessWidget {
-  final FoodItemModel foodItemModel;
-  final VoidCallback onFavoriteToggle;
-  const TopBanner({
-    super.key,
-    required this.foodItemModel,
-    required this.onFavoriteToggle,
-  });
+class TopBanner extends StatefulWidget {
+  final int index;
+  const TopBanner({super.key, required this.index});
 
+  @override
+  State<TopBanner> createState() => _TopBannerState();
+}
+
+class _TopBannerState extends State<TopBanner> {
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Image.network(
-          foodItemModel.imageUrl,
+          foodMenu[widget.index].imageUrl,
           width: double.infinity,
           fit: BoxFit.contain,
         ),
@@ -34,11 +34,17 @@ class TopBanner extends StatelessWidget {
           top: 8,
           right: 8,
           child: _iconContainer(
-            icon: foodItemModel.isFavorite
+            icon: foodMenu[widget.index].isFavorite
                 ? Icons.favorite
                 : Icons.favorite_border,
-            iconColor: Colors.red,
-            onTap: onFavoriteToggle,
+            iconColor: const Color.fromRGBO(244, 67, 54, 1),
+            onTap: () {
+              setState(() {
+                foodMenu[widget.index] = foodMenu[widget.index].copyWith(
+                  isFavorite: !foodMenu[widget.index].isFavorite,
+                );
+              });
+            },
           ),
         ),
       ],
