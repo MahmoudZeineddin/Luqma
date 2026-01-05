@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/core/extensions/context_extensions.dart';
 import 'package:food_delivery/models/food_item.dart';
+import 'package:food_delivery/ui_models/food_details_arg.dart';
 import 'package:food_delivery/widgets/food_details/food_item_conter.dart';
 import 'package:food_delivery/widgets/food_details/top_banner.dart';
 
 class FoodDetailsPage extends StatefulWidget {
-  final int index;
-  const FoodDetailsPage({super.key, required this.index});
-
+  const FoodDetailsPage({super.key});
+  static const String routeName = '/food-details';
   @override
   State<FoodDetailsPage> createState() => _FoodDetailsPageState();
 }
@@ -40,16 +40,93 @@ Widget itemDetails(
 class _FoodDetailsPageState extends State<FoodDetailsPage> {
   @override
   Widget build(BuildContext context) {
+    final FoodDetailsArg foodDetailsArg =
+        ModalRoute.of(context)!.settings.arguments as FoodDetailsArg;
+
     return Scaffold(
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Expanded(
+            //   child: CustomScrollView(
+            //     slivers: [
+            //       SliverAppBar(
+            //         expandedHeight: context.heightPct(.35),
+            //         pinned: true,
+            //         flexibleSpace: TopBanner(index: widget.index),
+            //       ),
+            //       SliverPadding(
+            //         padding: const EdgeInsets.all(17.0),
+            //         sliver: SliverList(
+            //           delegate: SliverChildListDelegate([
+            //             Column(
+            //               crossAxisAlignment: CrossAxisAlignment.start,
+            //               children: [
+            //                 SizedBox(height: 8),
+            //                 Row(
+            //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //                   children: [
+            //                     Column(
+            //                       crossAxisAlignment: CrossAxisAlignment.start,
+            //                       children: [
+            //                         Text(
+            //                           foodMenu[widget.index].name,
+            //                           style: context.textTheme.headlineMedium!
+            //                               .copyWith(
+            //                                 fontWeight: FontWeight.bold,
+            //                               ),
+            //                         ),
+            //                         SizedBox(height: 3),
+            //                         Text(
+            //                           foodMenu[widget.index].subtitle,
+            //                           style: context.textTheme.bodyMedium!
+            //                               .copyWith(color: Colors.grey),
+            //                         ),
+            //                       ],
+            //                     ),
+            //                     FoodItemConter(),
+            //                   ],
+            //                 ),
+            //                 SizedBox(height: 25),
+            //                 Row(
+            //                   children: [
+            //                     Expanded(
+            //                       child: itemDetails(
+            //                         context,
+            //                         titleName: 'Size',
+            //                         subTitle: 'Medium',
+            //                       ),
+            //                     ),
+            //                     Expanded(
+            //                       child: itemDetails(
+            //                         context,
+            //                         titleName: 'Cooking',
+            //                         subTitle: '10-15 min',
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+
+            //                 SizedBox(height: 25),
+            //                 Text(
+            //                   foodMenu[widget.index].description.toString(),
+            //                   style: context.textTheme.bodyLarge,
+            //                 ),
+            //                 SizedBox(height: 5),
+            //               ],
+            //             ),
+            //           ]),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    TopBanner(index: widget.index),
+                    TopBanner(index: foodDetailsArg.index),
                     Padding(
                       padding: const EdgeInsets.all(17.0),
                       child: Column(
@@ -63,13 +140,13 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    foodMenu[widget.index].name,
+                                    foodMenu[foodDetailsArg.index].name,
                                     style: context.textTheme.headlineMedium!
                                         .copyWith(fontWeight: FontWeight.bold),
                                   ),
                                   SizedBox(height: 3),
                                   Text(
-                                    foodMenu[widget.index].subtitle,
+                                    foodMenu[foodDetailsArg.index].subtitle,
                                     style: context.textTheme.bodyMedium!
                                         .copyWith(color: Colors.grey),
                                   ),
@@ -100,7 +177,8 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                           ),
                           SizedBox(height: 25),
                           Text(
-                            foodMenu[widget.index].description.toString(),
+                            foodMenu[foodDetailsArg.index].description
+                                .toString(),
                             style: context.textTheme.bodyLarge,
                           ),
                           SizedBox(height: 15),
@@ -117,7 +195,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "${foodMenu[widget.index].price}\$",
+                    "${foodMenu[foodDetailsArg.index].price}\$",
                     style: context.textTheme.headlineMedium!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),

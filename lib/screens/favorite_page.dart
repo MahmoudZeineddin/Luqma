@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/common.dart';
 import 'package:food_delivery/models/food_item.dart';
 import 'package:food_delivery/screens/food_details_page.dart';
+import 'package:food_delivery/utilities/app_assets.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({super.key});
@@ -19,7 +20,7 @@ class _FavoritePageState extends State<FavoritePage> {
             child: Column(
               children: [
                 Image.asset(
-                  'assets/images/empty_state.png',
+                  AppAssets.emptyState,
                   height: !context.isLandscape
                       ? context.heightPct(.3)
                       : context.heightPct(.4),
@@ -41,20 +42,25 @@ class _FavoritePageState extends State<FavoritePage> {
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
                   onTap: () {
-                    Navigator.of(context)
-                        .push(
-                          MaterialPageRoute(
-                            builder: (context) {
-                              int targetedIndex = foodMenu.indexOf(
-                                favoriteItems[index],
-                              );
-                              return FoodDetailsPage(index: targetedIndex);
-                            },
-                          ),
-                        )
-                        .then((_) {
-                          setState(() {});
-                        });
+                    int targetedIndex = foodMenu.indexOf(favoriteItems[index]);
+                    Navigator.of(context).pushNamed(
+                      FoodDetailsPage.routeName,
+                      arguments: targetedIndex,
+                    );
+                    // Navigator.of(context)
+
+                    //     .push<String>(
+                    //       MaterialPageRoute(
+                    //         builder: (context) {
+                    //           return FoodDetailsPage();
+                    //         },
+                    //       ),
+                    //     )
+                    //     .then((value) {
+                    //       setState(() {
+                    //         debugPrint(',,,,, The value $value');
+                    //       });
+                    //     });
                   },
                   child: Card(
                     shape: RoundedRectangleBorder(

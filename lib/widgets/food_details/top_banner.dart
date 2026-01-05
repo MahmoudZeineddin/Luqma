@@ -26,7 +26,8 @@ class _TopBannerState extends State<TopBanner> {
           child: _iconContainer(
             icon: Icons.chevron_left,
             iconColor: Colors.red,
-            onTap: () => Navigator.pop(context),
+            onTap: () =>
+                Navigator.of(context).pop<String>(foodMenu[widget.index].name),
           ),
         ),
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/common.dart';
+import 'package:food_delivery/utilities/app_assets.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
@@ -69,7 +70,7 @@ class AccountPage extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(100),
         child: Image.asset(
-          'assets/images/account.png',
+          AppAssets.profilePhoto,
           height: context.heightPct(height),
           width: context.widthPct(width),
         ),

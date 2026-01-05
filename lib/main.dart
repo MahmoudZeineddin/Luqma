@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/screens/bottom_navbar.dart';
+import 'package:food_delivery/screens/food_details_page.dart';
 
 void main() {
   // WidgetsFlutterBinding();
@@ -37,7 +38,11 @@ class MyApp extends StatelessWidget {
         ),
         fontFamily: 'OpenSans',
       ),
-      home: const BottomNavBarPage(),
+
+      routes: {
+        '/': (context) => const BottomNavBarPage(),
+        FoodDetailsPage.routeName: (context) => FoodDetailsPage(),
+      },
       debugShowCheckedModeBanner: false,
     );
   }
