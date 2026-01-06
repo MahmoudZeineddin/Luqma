@@ -1,5 +1,5 @@
 class FoodItemModel {
-  final String id; // إضافة المعرف الفريد
+  final String id;
   final String name;
   final String imageUrl;
   final double price;
@@ -9,7 +9,7 @@ class FoodItemModel {
   final String categoryId;
 
   FoodItemModel({
-    required this.id, // مطلوب
+    required this.id,
     required this.name,
     required this.imageUrl,
     required this.price,
@@ -37,7 +37,7 @@ class FoodItemModel {
       isFavorite: isFavorite ?? this.isFavorite,
       subtitle: subtitle ?? this.subtitle,
       description: description ?? this.description,
-      categoryId: categoryId ?? this.categoryId, // تم التصحيح هنا
+      categoryId: categoryId ?? this.categoryId,
     );
   }
 }

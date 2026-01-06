@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/common.dart';
 import 'package:food_delivery/models/food_item.dart';
 import 'package:food_delivery/screens/food_details_page.dart';
+import 'package:food_delivery/ui_models/food_details_arg.dart';
 import 'package:food_delivery/utilities/app_assets.dart';
 
 class FavoritePage extends StatefulWidget {
@@ -45,7 +46,7 @@ class _FavoritePageState extends State<FavoritePage> {
                     int targetedIndex = foodMenu.indexOf(favoriteItems[index]);
                     Navigator.of(context).pushNamed(
                       FoodDetailsPage.routeName,
-                      arguments: targetedIndex,
+                      arguments: FoodDetailsArg(index: targetedIndex),
                     );
                     // Navigator.of(context)
 

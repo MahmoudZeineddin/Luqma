@@ -28,7 +28,7 @@ Widget itemDetails(
       SizedBox(height: 3),
       Text(
         subTitle,
-        style: context.textTheme.bodyLarge!.copyWith(
+        style: context.textTheme.bodyMedium!.copyWith(
           color: Colors.black87,
           fontWeight: FontWeight.w400,
         ),
@@ -147,7 +147,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                                   SizedBox(height: 3),
                                   Text(
                                     foodMenu[foodDetailsArg.index].subtitle,
-                                    style: context.textTheme.bodyMedium!
+                                    style: context.textTheme.bodySmall!
                                         .copyWith(color: Colors.grey),
                                   ),
                                 ],
@@ -204,22 +204,20 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                   SizedBox(
                     width: context.widthPct(.6),
                     height: context.heightPct(.05),
-                    child: Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: context.colorScheme.primary,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: context.colorScheme.primary,
 
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Text(
-                          'Add to cart',
-                          style: context.textTheme.titleLarge!.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+                      ),
+                      child: Text(
+                        'Add to cart',
+                        style: context.textTheme.titleLarge!.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
                     ),

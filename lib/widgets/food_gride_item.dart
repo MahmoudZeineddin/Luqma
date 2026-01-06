@@ -19,9 +19,6 @@ class _FoodGrigeItemState extends State<FoodGrigeItem> {
   @override
   Widget build(BuildContext context) {
     // final size = MediaQuery.of(context).size;
-    final trgetedIndex = foodMenu.indexOf(
-      widget.filteredFood[widget.foodIndex],
-    );
     return Container(
       decoration: BoxDecoration(color: Colors.grey[50]),
       child: LayoutBuilder(
@@ -41,11 +38,7 @@ class _FoodGrigeItemState extends State<FoodGrigeItem> {
                   ),
                   Align(
                     alignment: Alignment.topRight,
-                    child: Container(
-                      // decoration: BoxDecoration(
-                      //   color: Colors.white,
-                      //   borderRadius: BorderRadius.circular(32.0),
-                      // ),
+                    child: SizedBox(
                       height: maxHeight * .15,
                       width: maxWidth * .15,
                       child: InkWell(
@@ -53,31 +46,22 @@ class _FoodGrigeItemState extends State<FoodGrigeItem> {
                           final foodId =
                               widget.filteredFood[widget.foodIndex].id;
 
-                          final indexInFoodMenu = foodMenu.indexWhere(
+                          final indexInMain = foodMenu.indexWhere(
                             (item) => item.id == foodId,
                           );
 
-                          if (indexInFoodMenu == -1) return;
+                          if (indexInMain != -1) {
+                            setState(() {
+                              foodMenu[indexInMain] = foodMenu[indexInMain]
+                                  .copyWith(
+                                    isFavorite:
+                                        !foodMenu[indexInMain].isFavorite,
+                                  );
 
-                          setState(() {
-                            foodMenu[indexInFoodMenu] =
-                                foodMenu[indexInFoodMenu].copyWith(
-                                  isFavorite:
-                                      !foodMenu[indexInFoodMenu].isFavorite,
-                                );
-                          });
-                          // // final targetedIndex = foodMenu.indexOf(
-                          // //   widget.filteredFood[widget.foodIndex],
-                          // // );
-                          // setState(() {
-                          //   widget.filteredFood[widget.foodIndex] = widget
-                          //       .filteredFood[widget.foodIndex]
-                          //       .copyWith(
-                          //         isFavorite: !widget
-                          //             .filteredFood[widget.foodIndex]
-                          //             .isFavorite,
-                          //       );
-                          // });
+                              widget.filteredFood[widget.foodIndex] =
+                                  foodMenu[indexInMain];
+                            });
+                          }
                         },
                         child: widget.filteredFood[widget.foodIndex].isFavorite
                             ? Icon(
